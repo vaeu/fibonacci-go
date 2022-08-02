@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 
 	"github.com/vaeu/fibonacci-go"
@@ -12,7 +13,11 @@ const (
 )
 
 func main() {
-	for i := MIN; i <= MAX; i++ {
+	min := flag.Int("min", MIN, "initial number to start iterating from")
+	max := flag.Int("max", MAX, "last number to iterate through")
+	flag.Parse()
+
+	for i := *min; i <= *max; i++ {
 		fmt.Println(fibonacci.Calculate(i))
 	}
 }
