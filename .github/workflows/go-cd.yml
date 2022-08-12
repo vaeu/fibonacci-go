@@ -19,3 +19,10 @@ jobs:
 
       - name: Build
         run: misc/build
+
+      - name: Release
+        uses: softprops/action-gh-release@v0.1.14
+        with:
+          files: |
+            out/*
+            README.md
