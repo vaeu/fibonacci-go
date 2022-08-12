@@ -2,6 +2,8 @@
 src=cmd/fibonacci/main.go
 name=fibonacci
 
+mkdir out
+
 GOOS=openbsd GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
   && tar czf out/$name-openbsd-amd64.tar.gz $name
 GOOS=openbsd GOARCH=386 go build -o $name -ldflags="-s -w" $src \
