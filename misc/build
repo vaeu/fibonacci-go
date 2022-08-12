@@ -1,10 +1,11 @@
 #!/bin/sh
 src=cmd/fibonacci/main.go
 name=fibonacci
+files=README.md
 
 mkdir out
 
 GOOS=openbsd GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
-  && tar czf out/$name-openbsd-amd64.tar.gz $name
+  && tar czf out/$name-openbsd-amd64.tar.gz $name $files
 GOOS=openbsd GOARCH=386 go build -o $name -ldflags="-s -w" $src \
-  && tar czf out/$name-openbsd-386.tar.gz $name
+  && tar czf out/$name-openbsd-386.tar.gz $name $files
