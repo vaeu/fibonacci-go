@@ -26,6 +26,6 @@ GOOS=linux GOARCH=386 go build -o $name -ldflags="-s -w" $src \
 GOOS=darwin GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
   && tar czf out/$name-darwin-amd64.tar.gz $name $files
 GOOS=windows GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
-  && tar czf out/$name-windows-amd64.tar.gz $name $files
+  && zip -q out/$name-windows-amd64.zip $name $files
 GOOS=windows GOARCH=386 go build -o $name -ldflags="-s -w" $src \
-  && tar czf out/$name-windows-386.tar.gz $name $files
+  && zip -q out/$name-windows-386.zip $name $files
