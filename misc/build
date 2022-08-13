@@ -9,3 +9,23 @@ GOOS=openbsd GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
   && tar czf out/$name-openbsd-amd64.tar.gz $name $files
 GOOS=openbsd GOARCH=386 go build -o $name -ldflags="-s -w" $src \
   && tar czf out/$name-openbsd-386.tar.gz $name $files
+GOOS=freebsd GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
+  && tar czf out/$name-freebsd-amd64.tar.gz $name $files
+GOOS=freebsd GOARCH=386 go build -o $name -ldflags="-s -w" $src \
+  && tar czf out/$name-freebsd-386.tar.gz $name $files
+GOOS=netbsd GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
+  && tar czf out/$name-netbsd-amd64.tar.gz $name $files
+GOOS=netbsd GOARCH=386 go build -o $name -ldflags="-s -w" $src \
+  && tar czf out/$name-netbsd-386.tar.gz $name $files
+GOOS=dragonfly GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
+  && tar czf out/$name-dragonfly-amd64.tar.gz $name $files
+GOOS=linux GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
+  && tar czf out/$name-linux-amd64.tar.gz $name $files
+GOOS=linux GOARCH=386 go build -o $name -ldflags="-s -w" $src \
+  && tar czf out/$name-linux-386.tar.gz $name $files
+GOOS=darwin GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
+  && tar czf out/$name-darwin-amd64.tar.gz $name $files
+GOOS=windows GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
+  && tar czf out/$name-windows-amd64.tar.gz $name $files
+GOOS=windows GOARCH=386 go build -o $name -ldflags="-s -w" $src \
+  && tar czf out/$name-windows-386.tar.gz $name $files
