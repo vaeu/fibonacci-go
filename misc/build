@@ -35,7 +35,7 @@ archive_binaries() {
 produce_checksums() {
   cd out || return
   for archive in *; do
-    shasum -a 256 "$archive" > "$archive".CHECKSUM
+    shasum -a 256 "$archive" >> CHECKSUMS
   done
 }
 main "$@"
