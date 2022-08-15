@@ -2,6 +2,10 @@
 
 ## Installation
 
+Either download pre-compiled binary for your operating system from
+[GitHub releases](https://github.com/vaeu/fibonacci-go/releases) or
+install the program using the `go` tool:
+
 ```
 $ go install github.com/vaeu/fibonacci-go/cmd/...@latest
 ```
