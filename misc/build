@@ -19,7 +19,7 @@ archive_binaries() {
         windows) atail="zip"; atool="zip -q"; ext=".exe" ;;
         *) ;;
       esac
-      go build -o $name$ext -ldflags="-s -w" $src
+      CGO_ENABLED=0 go build -o $name$ext -ldflags="-s -w" $src
       $atool out/$name-$os-$arch.$atail $name$ext $files
     done
   done
