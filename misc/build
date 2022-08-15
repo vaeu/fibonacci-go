@@ -17,7 +17,6 @@ archive_binaries() {
       case $os in
         dragonfly|darwin) test "$arch" = "amd64" || continue ;;
         windows) atail="zip"; atool="zip -q"; ext=".exe" ;;
-        *) ;;
       esac
       CGO_ENABLED=0 go build -o $name$ext -ldflags="-s -w" $src
       $atool out/$name-$os-$arch.$atail $name$ext $files
