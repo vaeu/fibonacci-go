@@ -7,30 +7,22 @@ main() {
   archive_binaries && produce_checksums
 }
 archive_binaries() {
-  GOOS=openbsd GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
-    && tar czf out/$name-openbsd-amd64.tar.gz $name $files
-  GOOS=openbsd GOARCH=386 go build -o $name -ldflags="-s -w" $src \
-    && tar czf out/$name-openbsd-386.tar.gz $name $files
-  GOOS=freebsd GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
-    && tar czf out/$name-freebsd-amd64.tar.gz $name $files
-  GOOS=freebsd GOARCH=386 go build -o $name -ldflags="-s -w" $src \
-    && tar czf out/$name-freebsd-386.tar.gz $name $files
-  GOOS=netbsd GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
-    && tar czf out/$name-netbsd-amd64.tar.gz $name $files
-  GOOS=netbsd GOARCH=386 go build -o $name -ldflags="-s -w" $src \
-    && tar czf out/$name-netbsd-386.tar.gz $name $files
-  GOOS=dragonfly GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
-    && tar czf out/$name-dragonfly-amd64.tar.gz $name $files
-  GOOS=linux GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
-    && tar czf out/$name-linux-amd64.tar.gz $name $files
-  GOOS=linux GOARCH=386 go build -o $name -ldflags="-s -w" $src \
-    && tar czf out/$name-linux-386.tar.gz $name $files
-  GOOS=darwin GOARCH=amd64 go build -o $name -ldflags="-s -w" $src \
-    && tar czf out/$name-darwin-amd64.tar.gz $name $files
-  GOOS=windows GOARCH=amd64 go build -o $name.exe -ldflags="-s -w" $src \
-    && zip -q out/$name-windows-amd64.zip $name.exe $files
-  GOOS=windows GOARCH=386 go build -o $name.exe -ldflags="-s -w" $src \
-    && zip -q out/$name-windows-386.zip $name.exe $files
+  atail="tar.gz"
+  atool="tar czf"
+  for os in openbsd freebsd netbsd dragonfly linux darwin windows; do
+    GOOS=$os
+    for arch in amd64 386; do
+      GOARCH=$arch
+      export GOOS GOARCH
+      case $os in
+        dragonfly|darwin) test "$arch" = "amd64" || continue ;;
+        windows) atail="zip"; atool="zip -q"; ext=".exe" ;;
+        *) ;;
+      esac
+      CGO_ENABLED=0 go build -o $name$ext -ldflags="-s -w" $src
+      $atool out/$name-$os-$arch.$atail $name$ext $files
+    done
+  done
 }
 produce_checksums() {
   cd out || return
