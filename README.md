@@ -30,8 +30,8 @@ Print Nth number from 15 through 18.
 $ fibonacci -min 15 -max 18
 ```
 
-Print Nth number of 26.
+Print Nth number of 69.
 
 ```
-$ fibonacci -min 26 -max 26
+$ fibonacci -min 69 -max 69
 ```
