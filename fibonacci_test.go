@@ -10,6 +10,7 @@ var cases = []struct {
 	{2, 1},
 	{12, 144},
 	{19, 4181},
+	{69, 117669030460994},
 }
 
 func TestCalculate(t *testing.T) {
